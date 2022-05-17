@@ -35,5 +35,35 @@ namespace MegaDesk2
                 dataGridSearch.DataSource = array;
             }
         }
+
+        private void comFilterSurface_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string selectedValue = comFilterSurface.Text;
+            this.FilterQuotesBySurfaceMaterial(selectedValue);
+        }
+
+        public void FilterQuotesBySurfaceMaterial(string surface)
+        {
+            List<object> filteredQuotes = new List<object>();
+
+            using (StreamReader r = new StreamReader("quotes.json"))
+            {
+                string json = r.ReadToEnd();
+                dynamic array = JsonConvert.DeserializeObject(json);
+                foreach (dynamic quote in array)
+                {
+                    Console.WriteLine(surface);
+                    if (surface == "All")
+                    {
+                        filteredQuotes.Add(quote);
+                    } else if (quote.surfaceMaterial == surface)
+                    {
+                        filteredQuotes.Add(quote);
+                    }
+                }
+            }
+
+            dataGridSearch.DataSource = filteredQuotes;
+        }
     }
 }
