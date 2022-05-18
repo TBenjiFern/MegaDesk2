@@ -33,5 +33,6 @@ namespace MegaDesk2
         public int NumDrawers { get; set; }
 
         public DesktopMaterial  DesktopMaterial { get; set; }
+
     }
 }

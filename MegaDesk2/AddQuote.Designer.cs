@@ -37,8 +37,8 @@
             this.deliveryComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.deskDimensions = new System.Windows.Forms.GroupBox();
-            this.deskWidth = new System.Windows.Forms.Label();
             this.deskDepth = new System.Windows.Forms.Label();
+            this.deskWidth = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -62,6 +62,7 @@
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -139,12 +140,6 @@
             // 
             this.materialComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialComboBox.FormattingEnabled = true;
-            this.materialComboBox.Items.AddRange(new object[] {
-            "Laminate",
-            "Oak",
-            "Pine",
-            "Rosewood",
-            "Veneer"});
             this.materialComboBox.Location = new System.Drawing.Point(211, 92);
             this.materialComboBox.Name = "materialComboBox";
             this.materialComboBox.Size = new System.Drawing.Size(134, 33);
@@ -187,16 +182,6 @@
             this.deskDimensions.TabStop = false;
             this.deskDimensions.Text = "Desk Dimensions";
             // 
-            // deskWidth
-            // 
-            this.deskWidth.AutoSize = true;
-            this.deskWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deskWidth.Location = new System.Drawing.Point(19, 30);
-            this.deskWidth.Name = "deskWidth";
-            this.deskWidth.Size = new System.Drawing.Size(80, 29);
-            this.deskWidth.TabIndex = 5;
-            this.deskWidth.Text = "Width:";
-            // 
             // deskDepth
             // 
             this.deskDepth.AutoSize = true;
@@ -206,6 +191,16 @@
             this.deskDepth.Size = new System.Drawing.Size(83, 29);
             this.deskDepth.TabIndex = 9;
             this.deskDepth.Text = "Depth:";
+            // 
+            // deskWidth
+            // 
+            this.deskWidth.AutoSize = true;
+            this.deskWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deskWidth.Location = new System.Drawing.Point(19, 30);
+            this.deskWidth.Name = "deskWidth";
+            this.deskWidth.Size = new System.Drawing.Size(80, 29);
+            this.deskWidth.TabIndex = 5;
+            this.deskWidth.Text = "Width:";
             // 
             // groupBox1
             // 
