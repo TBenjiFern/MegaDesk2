@@ -17,7 +17,13 @@ namespace MegaDesk2
         public SearchQuotes()
         {
             InitializeComponent();
-            this.LoadJson2();
+
+            List<DesktopMaterial> materialsList = Enum.GetValues(typeof(DesktopMaterial)).Cast<DesktopMaterial>().ToList();
+            comFilterSurface.DataSource = materialsList;
+
+            comFilterSurface.SelectedIndex = -1;
+
+            this.loadJson();
         }
 
         private void SearchQuotes_FormClosed(object sender, FormClosedEventArgs e)
@@ -25,44 +31,63 @@ namespace MegaDesk2
             ((Form)this.Tag).Show();
         }
 
-        public void LoadJson2()
+        public void loadJson()
         {
-            using (StreamReader r = new StreamReader("quotes.json"))
-            {
-                string json = r.ReadToEnd();
-                dynamic array = JsonConvert.DeserializeObject(json);
+            var quotesFile = @"quotes.json";
 
-                dataGridSearch.DataSource = array;
+            if (File.Exists(quotesFile))
+            {
+                using (StreamReader r = new StreamReader(quotesFile))
+                {
+                    string json = r.ReadToEnd();
+                    List<DeskQuote> deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+
+                    dataGridSearch.DataSource = deskQuotes.Select(d => new
+                    {
+                        Date = d.Date,
+                        Customer = d.Customer,
+                        Depth = d.Desk.Depth,
+                        Width = d.Desk.Width,
+                        Drawers = d.Desk.NumberOfDrawers,
+                        SurfaceMaterial = d.Desk.SurfaceMaterial,
+                        DeliveryType = d.DeliveryType,
+                        Amount = d.Amount.ToString("c"),
+                    }).ToList();
+                }
             }
         }
 
         private void comFilterSurface_SelectedValueChanged(object sender, EventArgs e)
         {
-            string selectedValue = comFilterSurface.Text;
-            this.FilterQuotesBySurfaceMaterial(selectedValue);
+            int selectedValue = comFilterSurface.SelectedIndex;
+            DesktopMaterial desktopMaterial = (DesktopMaterial)selectedValue;
+            this.loadJson(desktopMaterial);
         }
 
-        public void FilterQuotesBySurfaceMaterial(string surface)
+        public void loadJson(DesktopMaterial desktopMaterial)
         {
-            List<object> filteredQuotes = new List<object>();
+            var quotesFile = @"quotes.json";
 
-            using (StreamReader r = new StreamReader("quotes.json"))
+            if (File.Exists(quotesFile))
             {
-                string json = r.ReadToEnd();
-                dynamic array = JsonConvert.DeserializeObject(json);
-                foreach (dynamic quote in array)
+                using (StreamReader r = new StreamReader(quotesFile))
                 {
-                    if (surface == "All")
+                    string json = r.ReadToEnd();
+                    List<DeskQuote> deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+
+                    dataGridSearch.DataSource = deskQuotes.Select(d => new
                     {
-                        filteredQuotes.Add(quote);
-                    } else if (quote.surfaceMaterial == surface)
-                    {
-                        filteredQuotes.Add(quote);
-                    }
+                        Date = d.Date,
+                        Customer = d.Customer,
+                        Depth = d.Desk.Depth,
+                        Width = d.Desk.Width,
+                        Drawers = d.Desk.NumberOfDrawers,
+                        SurfaceMaterial = d.Desk.SurfaceMaterial,
+                        DeliveryType = d.DeliveryType,
+                        Amount = d.Amount.ToString("c"),
+                    }).Where(q => q.SurfaceMaterial == desktopMaterial).ToList();
                 }
             }
-
-            dataGridSearch.DataSource = filteredQuotes;
         }
     }
 }

@@ -58,13 +58,6 @@
             // 
             this.comFilterSurface.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comFilterSurface.FormattingEnabled = true;
-            this.comFilterSurface.Items.AddRange(new object[] {
-            "All",
-            "Oak",
-            "Laminate",
-            "Pine",
-            "Rosewood",
-            "Veneer"});
             this.comFilterSurface.Location = new System.Drawing.Point(397, 77);
             this.comFilterSurface.Name = "comFilterSurface";
             this.comFilterSurface.Size = new System.Drawing.Size(373, 54);

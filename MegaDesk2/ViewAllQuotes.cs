@@ -17,7 +17,7 @@ namespace MegaDesk2
         public ViewAllQuotes()
         {
             InitializeComponent();
-            this.LoadJson();
+            this.loadJson();
         }
 
         private void ViewAllQuotes_FormClosed(object sender, FormClosedEventArgs e)
@@ -25,9 +25,10 @@ namespace MegaDesk2
             ((Form)this.Tag).Show();
         }
 
-        public void LoadJson()
+        public void loadJson()
         {
             var quotesFile = @"quotes.json";
+
             if (File.Exists(quotesFile))
             {
                 using (StreamReader r = new StreamReader(quotesFile))
