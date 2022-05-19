@@ -27,12 +27,26 @@ namespace MegaDesk2
 
         public void LoadJson()
         {
-            using (StreamReader r = new StreamReader("quotes.json"))
+            var quotesFile = @"quotes.json";
+            if (File.Exists(quotesFile))
             {
-                string json = r.ReadToEnd();
-                dynamic array = JsonConvert.DeserializeObject(json);
+                using (StreamReader r = new StreamReader(quotesFile))
+                {
+                    string json = r.ReadToEnd();
+                    List<DeskQuote> deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
 
-                dataGridView.DataSource = array;
+                    dataGridView.DataSource = deskQuotes.Select(d => new
+                    {
+                        Date = d.Date,
+                        Customer = d.Customer,
+                        Depth = d.Desk.Depth,
+                        Width = d.Desk.Width,
+                        Drawers = d.Desk.NumberOfDrawers,
+                        SurfaceMaterial = d.Desk.SurfaceMaterial,
+                        DeliveryType = d.DeliveryType,
+                        Amount = d.Amount.ToString("c"),
+                    }).ToList();
+                }
             }
         }
     }

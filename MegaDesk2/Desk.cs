@@ -30,8 +30,8 @@ namespace MegaDesk2
 
         public int Depth { get; set; }
 
-        public int NumDrawers { get; set; }
+        public int NumberOfDrawers { get; set; }
 
-        public DesktopMaterial  DesktopMaterial { get; set; }
+        public DesktopMaterial  SurfaceMaterial { get; set; }
     }
 }

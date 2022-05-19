@@ -52,7 +52,6 @@ namespace MegaDesk2
                 dynamic array = JsonConvert.DeserializeObject(json);
                 foreach (dynamic quote in array)
                 {
-                    Console.WriteLine(surface);
                     if (surface == "All")
                     {
                         filteredQuotes.Add(quote);

@@ -17,12 +17,13 @@ namespace MegaDesk2
 
     public class DeskQuote
     {
-        public string CustomerName { get; set; }
+        public string Customer { get; set; }
 
-        public DateTime QuoteDate { get; set; }
+        public DateTime Date { get; set; }
 
-        public Shipping Shipping { get; set; }
+        public Shipping DeliveryType { get; set; }
 
         public Desk Desk { get; set; }
+        public decimal Amount { get; set; }
     }
 }
