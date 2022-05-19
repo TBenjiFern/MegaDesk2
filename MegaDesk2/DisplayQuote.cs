@@ -15,6 +15,33 @@ namespace MegaDesk2
         public DisplayQuote()
         {
             InitializeComponent();
+            var deskQuote = GetDeskQuote.DeskQuote;
+            displayCustomerName.Text = deskQuote.CustomerName;
+            displayWidthNumeric.Value = deskQuote.Desk.Width;
+            displayDepthNumeric.Value = deskQuote.Desk.Depth;
+            displayNumDrawersNumeric.Value = deskQuote.Desk.NumDrawers;
+            displayPriceTotal.Text = deskQuote.DeskPrice.ToString();
+            displayDate.Text = deskQuote.QuoteDate.ToString();
+
+            displayCustomerName.Enabled = false;
+            displayWidthNumeric.Enabled = false;
+            displayDepthNumeric.Enabled = false;
+            displayNumDrawersNumeric.Enabled = false;
+            displayMaterialComboBox.Enabled = false;
+            displayDeliveryComboBox.Enabled = false;
+            displayPriceTotal.Enabled = false;
+            displayDate.Enabled = false;
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void DisplayQuote_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ((Form)this.Tag).Show();
         }
     }
 }
