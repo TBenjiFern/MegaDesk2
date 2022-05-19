@@ -38,14 +38,14 @@ namespace MegaDesk2
 
                     dataGridView.DataSource = deskQuotes.Select(d => new
                     {
-                        Date = d.Date,
-                        Customer = d.Customer,
+                        Date = d.QuoteDate,
+                        Customer = d.CustomerName,
                         Depth = d.Desk.Depth,
                         Width = d.Desk.Width,
-                        Drawers = d.Desk.NumberOfDrawers,
-                        SurfaceMaterial = d.Desk.SurfaceMaterial,
-                        DeliveryType = d.DeliveryType,
-                        Amount = d.Amount.ToString("c"),
+                        Drawers = d.Desk.NumDrawers,
+                        SurfaceMaterial = d.Desk.DesktopMaterial,
+                        DeliveryType = d.Shipping,
+                        Amount = d.DeskPrice.ToString("c"),
                     }).ToList();
                 }
             }
